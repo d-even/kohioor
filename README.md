@@ -1,17 +1,63 @@
-<<<<<<< HEAD
-BLITZZ BOND
-=======
-# Monad Blitz Mumbai Submission Process
+BlitzzBond – Secure Crypto Bonds on Monad
 
-## Steps to prepare your project repo:
+A decentralized application that enables users to create and redeem password-protected crypto bonds on the Monad Testnet.
 
-1. Visit the `monad-blitz-mumbai` repo (link [here](https://github.com/monad-developers/monad-blitz-mumbai)) and fork it.
+BlitzzBond introduces a secret-based value transfer mechanism, allowing users to lock MON tokens into a smart contract and share a Key ID + password with a recipient. The recipient can redeem the funds securely without requiring prior wallet address exchange.
 
-![1.png](/screenshots/1.png)
+Live Concept
 
-2. Give it your project name, a one-liner description, make sure you are forking `main` branch and click `Create Fork`
+Instead of traditional wallet-to-wallet transfers, SecretBond works like a digital bearer bond:
+User 1 locks MON tokens.
+A Key ID + password is generated.
+The password is hashed and stored on-chain.
+User 2 enters the correct Key ID + password.
+Funds are released securely.
+No plaintext password is ever stored on-chain.
 
-![2.png](/screenshots/2.png)
+🧠 Problem Statement
 
-3. In your fork you can make all the changes you want, add code of your project, create branches, add information to `README.md` , you can change anything and everything.
->>>>>>> 60442600d48184ffc86c29f5cd59e3e991d1921a
+Traditional crypto transfers require:
+Sharing wallet addresses
+Understanding gas fees
+Technical blockchain knowledge
+This creates friction in onboarding and value distribution.
+
+ Solution
+
+SecretBond introduces:
+
+ Password-protected crypto bonds
+ On-chain cryptographic verification
+ Secure fund locking
+ One-time redemption
+ Decentralized execution
+
+The password is securely verified using:
+
+keccak256(abi.encodePacked(password))
+
+Only the hashed version is stored on-chain.
+
+Tech Stack
+Frontend: Next.js
+Smart Contract: Solidity
+Blockchain: Monad Testnet
+Wallet: MetaMask
+Library: Ethers.js (v6)
+
+ Smart Contract Overview
+
+Each bond stores:
+Creator address
+Locked amount
+Password hash
+Redemption status
+Core Functions:
+
+createBond(bytes32 keyId, bytes32 passwordHash)
+
+redeemBond(bytes32 keyId, string password)
+
+getBond(bytes32 keyId)
+
+Funds are transferred only after password verification.
